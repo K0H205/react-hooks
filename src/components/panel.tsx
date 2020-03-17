@@ -47,6 +47,7 @@ const Panel: React.FC<{ word: Word }> = props => {
               </ExpansionPanelDetails>
             ))
         )}
+        {props.children}
       </ExpansionPanel>
     </div>
   );

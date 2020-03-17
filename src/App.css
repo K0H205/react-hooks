@@ -346,3 +346,8 @@ svg:not([fill]) {
 [aria-disabled] {
   cursor: default;
 }
+
+.delete-button {
+  text-align: right;
+  margin-right: 1.5rem;
+}

@@ -6,6 +6,7 @@ import './App.css';
 import Search from './components/search';
 import Panel from './components/panel';
 import { Word } from './models/word';
+import DeleteButton from './components/delete-button';
 import { reducer, ActionType, State } from './store/index';
 import * as indexedDB from './assets/indexed-db';
 
@@ -74,7 +75,9 @@ const App: React.FC = () => {
         <div>
           {state.words.length > 0 &&
             state.words.map((word, index) => (
-              <Panel word={word} key={`${index}-${word}`} />
+              <Panel word={word} key={`${index}-${word}`}>
+                <DeleteButton id={word.id} />
+              </Panel>
             ))}
         </div>
       </div>

@@ -21,7 +21,7 @@ const Search: React.FC<{ search: (word: string) => void }> = props => {
 
   return (
     <div className="header">
-      <div className="title">Defenition List</div>
+      <div className="title">Definition List</div>
       <form className="search">
         <input
           value={searchValue}

@@ -11,10 +11,7 @@ body {
   background-color: #333;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -22,14 +19,6 @@ body {
   }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 .wordPanel {
   margin: 10px 5px 0px 5px;
@@ -53,6 +42,20 @@ body {
 
 .search {
   display: flex;
+}
+
+.delete-button {
+  text-align: right;
+  margin-right: 1.5rem;
+}
+
+input[type=text] {
+  font-size: 16px;
+  transform: scale(0.8);
+}
+
+.definitionType {
+  font-style: italic;
 }
 
 /* input[type='text'] {
@@ -345,9 +348,4 @@ svg:not([fill]) {
 /* Specify the unstyled cursor of disabled, not-editable, or otherwise inoperable elements */
 [aria-disabled] {
   cursor: default;
-}
-
-.delete-button {
-  text-align: right;
-  margin-right: 1.5rem;
 }

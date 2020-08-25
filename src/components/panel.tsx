@@ -37,13 +37,13 @@ const Panel: React.FC<{ word: Word }> = props => {
             value.map((val, index) => (
               <ExpansionPanelDetails>
                 {index === 0 ? (
-                  <div className="definitionType">
-                    {key}
+                  <div>
+                    <span className="definitionType">{key}</span>
                     <Typography key={index}>・{val.definition}</Typography>
                   </div>
                 ) : (
-                  <Typography key={index}>・{val.definition}</Typography>
-                )}
+                    <Typography key={index}>・{val.definition}</Typography>
+                  )}
               </ExpansionPanelDetails>
             ))
         )}

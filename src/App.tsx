@@ -9,27 +9,7 @@ import { Word } from './models/word';
 import DeleteButton from './components/delete-button';
 import { reducer, ActionType, State } from './store/index';
 import * as indexedDB from './assets/indexed-db';
-
-const handleErrors = (res: Response) => {
-  if (res.ok) {
-    return res;
-  }
-
-  switch (res.status) {
-    case 400:
-      throw Error('INVALID_TOKEN');
-    case 401:
-      throw Error('UNAUTHORIZED');
-    case 500:
-      throw Error('INTERNAL_SERVER_ERROR');
-    case 502:
-      throw Error('BAD_GATEWAY');
-    case 404:
-      throw Error('NOT_FOUND');
-    default:
-      throw Error('UNHANDLED_ERROR');
-  }
-};
+import { handleErrors } from './utils/handle-error';
 
 const App: React.FC = () => {
   const darkTheme = createMuiTheme({
@@ -65,7 +45,7 @@ const App: React.FC = () => {
           type: ActionType.SEARCH_WORD_SUCCESS,
           payload: [data]
         });
-      });
+      }).catch(e => alert(e))
   };
 
   return (

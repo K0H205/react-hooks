@@ -54,11 +54,12 @@ export const getAll = () => {
   });
 };
 
-export const add = (word: Word) => {
+export const add = (word: Word): Promise<Word> => {
   return new Promise(async (resolve, reject) => {
     const req = (await getStore()).add(word);
     req.onsuccess = () => {
-      resolve(word);
+      word.id = req.result as number;
+      return resolve(word);
     };
     req.onerror = () => {
       reject(word);

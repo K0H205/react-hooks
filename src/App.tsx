@@ -24,28 +24,37 @@ const App: React.FC = () => {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
+
   useEffect(() => {
-    indexedDB.getAll().then((data: Word[]) =>
-      dispatch({
-        type: ActionType.FETCH_WORDS_SUCCESS,
-        payload: data
-      })
-    );
+    fetchWords();
   }, []);
 
   const search = (word: string) => {
     const url = `https://dictionaryapi.herokuapp.com/?define=${word}`;
     fetch(url)
-      .then(result => handleErrors(result))
-      .then(response => response.json())
-      .then(res => res.shift())
-      .then((data: Word) => {
-        indexedDB.add(data).then();
+      .then((res) => handleErrors(res))
+      .then((res) => res.json())
+      .then((res) => res.shift())
+      .then((res) => addWord(res as Word))
+      .catch((e) => alert(e));
+  };
+
+  const fetchWords = () => {
+    indexedDB.getAll().then((words: Word[]) =>
+      dispatch({
+        type: ActionType.FETCH_WORDS_SUCCESS,
+        payload: words,
+      })
+    );
+  };
+
+  const addWord = (word: Word) => {
+    indexedDB.add(word).then((result) => {
         dispatch({
           type: ActionType.SEARCH_WORD_SUCCESS,
-          payload: [data]
+        payload: [result],
+      });
         });
-      }).catch(e => alert(e))
   };
 
   return (

@@ -57,6 +57,14 @@ const App: React.FC = () => {
         });
   };
 
+  const deleteWord = (word: Word) => {
+    indexedDB.remove(word.id).then();
+    dispatch({
+      type: ActionType.DELETE_WORD_SUCCESS,
+      payload: [word],
+    });
+  };
+
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="App">
@@ -65,7 +73,7 @@ const App: React.FC = () => {
           {state.words.length > 0 &&
             state.words.map((word, index) => (
               <Panel word={word} key={`${index}-${word}`}>
-                <DeleteButton id={word.id} />
+                <DeleteButton word={word} deleteWord={deleteWord} />
               </Panel>
             ))}
         </div>

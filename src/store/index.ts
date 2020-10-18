@@ -17,20 +17,27 @@ export enum ActionType {
 
 export const reducer = (state: State, action: Action) => {
   switch (action.type) {
-    case 'FETCH_WORDS_SUCCESS':
+    case "FETCH_WORDS_SUCCESS":
       return {
         ...state,
-        words: action.payload
+        words: action.payload,
       };
-    case 'SEARCH_WORD_SUCCESS':
+    case "SEARCH_WORD_SUCCESS":
       return {
         ...state,
-        words: [...state.words, ...action.payload]
+        words: [...state.words, ...action.payload],
       };
-    case 'SEARCH_WORD_FAILURE':
+    case "SEARCH_WORD_FAILURE":
       return {
-        ...state
+        ...state,
       };
+    case "DELETE_WORD_SUCCESS":
+      const deletedWordId = action.payload[0].id;
+      return {
+        ...state,
+        words: state.words.filter((word) => word.id !== deletedWordId),
+      };
+
     default:
       return state;
   }

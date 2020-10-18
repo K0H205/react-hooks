@@ -1,26 +1,26 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect } from "react";
 
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
-import './App.css';
-import Search from './components/search';
-import Panel from './components/panel';
-import { Word } from './models/word';
-import DeleteButton from './components/delete-button';
-import { reducer, ActionType, State } from './store/index';
-import * as indexedDB from './assets/indexed-db';
-import { handleErrors } from './utils/handle-error';
+import "./App.css";
+import Search from "./components/search";
+import Panel from "./components/panel";
+import { Word } from "./models/word";
+import DeleteButton from "./components/delete-button";
+import { reducer, ActionType, State } from "./store/index";
+import * as indexedDB from "./assets/indexed-db";
+import { handleErrors } from "./utils/handle-error";
 
 const App: React.FC = () => {
   const darkTheme = createMuiTheme({
     palette: {
       // Switching the dark mode on is a single property value change.
-      type: 'dark'
-    }
+      type: "dark",
+    },
   });
 
   const initialState: State = {
-    words: []
+    words: [],
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -50,11 +50,11 @@ const App: React.FC = () => {
 
   const addWord = (word: Word) => {
     indexedDB.add(word).then((result) => {
-        dispatch({
-          type: ActionType.SEARCH_WORD_SUCCESS,
+      dispatch({
+        type: ActionType.SEARCH_WORD_SUCCESS,
         payload: [result],
       });
-        });
+    });
   };
 
   const deleteWord = (word: Word) => {

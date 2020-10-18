@@ -1,12 +1,12 @@
-import { Word } from '../models/word';
+import { Word } from "../models/word";
 
-const dbName = 'word-db';
+const dbName = "word-db";
 const dbVersion = 1;
-const storeName = 'words';
+const storeName = "words";
 
 const getTransaction = async (stores: string) => {
   const db = await connect();
-  return db.transaction(stores, 'readwrite') as IDBTransaction;
+  return db.transaction(stores, "readwrite") as IDBTransaction;
 };
 const getStore = async () => {
   const transaction = await getTransaction(storeName);
@@ -18,14 +18,14 @@ const connect = () => {
     let db: IDBDatabase;
     const request = indexedDB.open(dbName, dbVersion);
     // NOTE: triggered when a database of a bigger version number than the existing stored database is loaded.
-    request.onupgradeneeded = event => {
+    request.onupgradeneeded = (event) => {
       db = (event.target as IDBRequest).result as IDBDatabase;
       db.createObjectStore(storeName, {
-        keyPath: 'id',
-        autoIncrement: true
+        keyPath: "id",
+        autoIncrement: true,
       });
     };
-    request.onsuccess = event => {
+    request.onsuccess = (event) => {
       db = (event.target as IDBRequest).result;
       resolve(db);
     };
@@ -39,7 +39,7 @@ export const getAll = () => {
   return new Promise<Word[]>(async (resolve, reject) => {
     let words: Word[] = [];
     const req = (await getStore()).openCursor();
-    req.onsuccess = event => {
+    req.onsuccess = (event) => {
       const cursor = (event.target as IDBRequest).result as IDBCursorWithValue;
       if (cursor) {
         words.push(cursor.value as Word);

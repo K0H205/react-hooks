@@ -1,4 +1,4 @@
-import { Word } from '../models/word';
+import { Word } from "../models/word";
 
 interface Action {
   payload: Word[];
@@ -10,9 +10,10 @@ export interface State {
 }
 
 export enum ActionType {
-  FETCH_WORDS_SUCCESS = 'FETCH_WORDS_SUCCESS',
-  SEARCH_WORD_SUCCESS = 'SEARCH_WORD_SUCCESS',
-  SEARCH_WORD_FAILURE = 'SEARCH_WORD_FAILURE'
+  FETCH_WORDS_SUCCESS = "FETCH_WORDS_SUCCESS",
+  SEARCH_WORD_SUCCESS = "SEARCH_WORD_SUCCESS",
+  SEARCH_WORD_FAILURE = "SEARCH_WORD_FAILURE",
+  DELETE_WORD_SUCCESS = "DELETE_WORD_SUCCESS",
 }
 
 export const reducer = (state: State, action: Action) => {

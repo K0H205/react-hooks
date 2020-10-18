@@ -78,7 +78,7 @@ export const put = (work: any) => {
   });
 };
 
-export const remove = (targetId: string) => {
+export const remove = (targetId: number) => {
   return new Promise(async (resolve, reject) => {
     const req = (await getStore()).delete(targetId);
     req.onsuccess = () => {
